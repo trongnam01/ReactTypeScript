@@ -1,5 +1,5 @@
 import useGlobalStore from '@/store/globalStore';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { apiGetInfoUser, apiGetToken } from './api';
 import { ACCESS_TOKEN, AUTHCODE, REFRESH_TOKEN } from '@/utils/constants';
 import { useNavigate } from 'react-router-dom';
@@ -46,7 +46,7 @@ function Auth(props: { children: React.ReactNode }) {
             const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
             if (!accessToken) {
-                window.location.href = '/login';
+                // window.location.href = '/login';
                 return;
             }
             setIsAuthenticated(true);
@@ -65,5 +65,4 @@ function Auth(props: { children: React.ReactNode }) {
         <>{isAuthenticated && children}</>
     );
 }
-
-export default Auth;
+export default memo(Auth);

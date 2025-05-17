@@ -1,20 +1,25 @@
  @import url('./font-awesome-6.4.2-pro-main/css/all.css');
 
- .menu-sider .ant-menu-submenu-title {
-   color: #ffffff !important;
-   /* Màu chữ mặc định */
+ .menu-sider {
+   .ant-menu-submenu-title {
+     color: #ffffff !important;
+   }
+
+   .ant-menu-submenu-selected,
+   .ant-menu-item-selected,
+   .ant-menu-light .ant-menu-item-selected,
+   .ant-menu-item-active {
+     color: #ffffff !important;
+     /* Màu chữ khi được chọn */
+   }
+
+   .ant-menu-title-content:hover,
+   .ant-menu-submenu-title:hover {
+     color: #e2d815 !important;
+     /* Màu chữ khi hover */
+   }
  }
 
- .custom-menu .ant-menu-submenu-selected,
- .custom-menu .ant-menu-item-selected,
- .custom-menu .ant-menu-item-active {
-   color: #ffffff !important;
-   /* Màu chữ khi được chọn */
-   background-color: #444444 !important;
-   /* Nền khi được chọn */
- }
-
- .custom-menu .ant-menu-submenu-title:hover {
-   color: #00b894 !important;
-   /* Màu chữ khi hover */
+ #webpack-dev-server-client-overlay {
+   display: none !important
  }

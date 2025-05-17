@@ -76,10 +76,6 @@ const refreshAccessToken = async (token: string): Promise<any> => {
   return res;
 };
 
-const handleRefreshToken = (refreshToken: string) => {
-  refreshAccessToken(refreshToken);
-};
-
 export const handleError = async (error: any): Promise<void> => {
   console.error("API Error:", error);
 
