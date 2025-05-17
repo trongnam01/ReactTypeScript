@@ -81,25 +81,22 @@ const handleRefreshToken = (refreshToken: string) => {
 };
 
 export const handleError = async (error: any): Promise<void> => {
-  const originalRequest = { ...error.config };
-  if (error?.response?.status === 401) {
-    if (!originalRequest?.retry) {
-      originalRequest.retry = true;
-      const loginData = sessionStorage.getItem('loginData');
-      const refreshToken = loginData ? JSON.parse(loginData).refresh_token : null;
-      const response = (await handleRefreshToken(refreshToken)) as any;
-      if (response?.data?.access_token) {
-        // axios.defaults.headers.common.Authorization = `Bearer ${response.data.access_token}`;
-        sessionStorage.setItem('loginData', JSON.stringify(response?.data));
-        baseApi(error.config);
-      } else {
-        // xử lý khi refresh token lỗi
-        window.location.reload();
-      }
+  console.error("API Error:", error);
+
+  if (error.code === "ERR_NETWORK") {
+    toast.error("Không thể kết nối tới server. Vui lòng kiểm tra kết nối mạng.");
+
+  } else if (error.response) {
+    const { status, data } = error.response;
+    if (status === 404) {
+      toast.error("Không tìm thấy API. Vui lòng kiểm tra URL.");
+    } else if (status === 500) {
+      toast.error("Lỗi server. Vui lòng thử lại sau.");
     } else {
-      // xử lý sau khi đã refresh
-      window.location.reload();
+      toast.error(data?.message || "Đã xảy ra lỗi.");
     }
+  } else {
+    toast.error("Lỗi không xác định. Vui lòng thử lại.");
   }
 };
 

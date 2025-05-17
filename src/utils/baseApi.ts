@@ -2,7 +2,7 @@
 import type { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 
-import { baseApi as baseURL } from '@/utils/constants';
+import { ACCESS_TOKEN, baseApi as baseURL } from '@/utils/constants';
 
 // eslint-disable-next-line import/no-cycle
 import { handleError } from './common';
@@ -20,7 +20,7 @@ const onRequest = async (config: InternalAxiosRequestConfig): Promise<InternalAx
     validateStatus: (status: number) => status < 400,
   };
   // console.log('go here');
-  // const accessToken = cookies().get(ACCESS_TOKEN);
+  const token = localStorage.getItem(ACCESS_TOKEN)
   // console.log(accessToken);
   if (!newConfig?.headers['Content-Type']) {
     newConfig.headers['Content-Type'] = 'application/json';
@@ -30,10 +30,10 @@ const onRequest = async (config: InternalAxiosRequestConfig): Promise<InternalAx
   // const token = loginData ? JSON.parse(loginData)?.data?.accessToken : null;
   // const token = getCookie(ACCESS_TOKEN);
   // console.log('token', token);
-  // if (token) {
-  //   // console.log('có token');
-  //   newConfig.headers.Authorization = `Bearer ${token}`;
-  // }
+  if (token) {
+    // console.log('có token');
+    newConfig.headers.Authorization = `Bearer ${token}`;
+  }
   newConfig.headers.clientTime = new Date().toISOString();
   return newConfig;
 };
@@ -52,8 +52,7 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   handleError(error);
-  // sessionStorage.removeItem('loginData');
-  // signOut();
+
   return Promise.reject(error);
 };
 

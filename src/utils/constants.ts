@@ -30,12 +30,13 @@ export const regexType = {
   // regex chỉ nhập số k nhập chữ
   number: /^-?\d*(\.\d*)?$/, // 1234567890
 };
-export const baseApi = process.env.BASE_API_URL;
+export const baseApi = process.env.REACT_APP_API_URL;
 
 export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 export const ACCESS_TOKEN = 'ACCESS_TOKEN';
+export const AUTHCODE = 'AUTHCODE';
 
-export const ORIGINAL = 'ORIGINAL';
+export const PUBLIC_PATH = '/myapp';
 
 export const formatYMD = 'YYYY-MM-DD';
 export const formatDMY = 'DD-MM-YYYY';
