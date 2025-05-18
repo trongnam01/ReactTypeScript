@@ -10,7 +10,7 @@ export const customTheme = {
   },
   components: {
     Layout: {
-      headerBg: '#4dc41f',
+      headerBg: 'var(--base-color)',
       colorBgSider: '#4dc41f',
       colorBgContent: "#4dc41f",
     },

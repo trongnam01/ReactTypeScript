@@ -80,10 +80,9 @@ export const dataMenu = [
                 "leaf": true,
                 "selectable": true,
                 "typeMenu": 1,
-                "url": "ds_vuan",
                 "children": [
                     {
-                        "id": "7f000001-4586-15ec-8951-s86e4147f1216",
+                        "id": "7f000001-4586-15ec-8951-s86e4147fs1216",
                         "name": "Vụ án khởi tố",
                         "code": "018043004",
                         "component": "DSVuAnView",
@@ -91,11 +90,12 @@ export const dataMenu = [
                         "leaf": true,
                         "selectable": true,
                         "typeMenu": 1,
-                        "url": "ds_vuan"
+                        "url": "ds_vuan66"
                     },
                     {
                         "id": "7f000001-4586-15ec-89ưư51-86e4147f1234",
-                        "name": "Vụ án chuyển"
+                        "name": "Vụ án2 chuyển",
+                        "url": "ds_vuan2"
                     },
                     {
                         "id": "7f000001-4586-15ec-8951ư-86e4147f1235",
@@ -124,8 +124,27 @@ export const dataMenu = [
         "children": [
             {
                 "id": "7f000001-4586-15ec-8951ư-86e4147f12s35",
-                "name": "Vụ án ủy thác"
+                "name": "Vụ án ủy thác",
+                "url": "uy_thac"
             }
         ]
     }
 ]
+
+// Hàm tìm path dẫn đến node có url trùng path
+export function findPathByUrl(
+    menuList: MenuItemData[],
+    url: string,
+    path: string[] = []
+): string[] | null {
+    for (const item of menuList) {
+        if (item.url === url && !item.children) {
+            return [...path, item.id];
+        }
+        if (item.children) {
+            const found = findPathByUrl(item.children, url, [...path, item.id]);
+            if (found) return found;
+        }
+    }
+    return null;
+}

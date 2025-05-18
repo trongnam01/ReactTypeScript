@@ -36,7 +36,7 @@ export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 export const ACCESS_TOKEN = 'ACCESS_TOKEN';
 export const AUTHCODE = 'AUTHCODE';
 
-export const PUBLIC_PATH = '/myapp';
+export const PUBLIC_PATH = process.env.PUBLIC_URL || '/myapp';
 
 export const formatYMD = 'YYYY-MM-DD';
 export const formatDMY = 'DD-MM-YYYY';

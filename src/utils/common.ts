@@ -59,23 +59,6 @@ export const checkTimeAgo = (time: string) => {
   return 'Vài phút trước';
 };
 
-const refreshAccessToken = async (token: string): Promise<any> => {
-  const res = await baseApi.post(
-    '/security-service/oauth/token',
-    {
-      grant_type: 'refresh_token',
-      refresh_token: token,
-    },
-    {
-      headers: {
-        Authorization: `Basic d2ViYXBwOmVuYW9AMTIz`,
-        'Content-Type': 'multipart/form-data',
-      },
-    },
-  );
-  return res;
-};
-
 export const handleError = async (error: any): Promise<void> => {
   console.error("API Error:", error);
 

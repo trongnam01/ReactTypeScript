@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { MenuItemData, MenuItemProps, RenderedMenuItem } from './type';
+import React, { useEffect, useState } from 'react';
 
 
 import bg1 from '@/assets/images/menu1.jpg';
@@ -8,28 +7,31 @@ import bg3 from '@/assets/images/menu3.jpg'
 import bg4 from '@/assets/images/menu4.jpg'
 import logo from '@/assets/images/logo1.png';
 import { NavLink } from 'react-router-dom';
-import { Menu, MenuProps, Tooltip } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
-import { log } from 'node:console';
+import { Menu, Tooltip } from 'antd';
+import { findPathByUrl, MenuItemData, MenuItemProps, RenderedMenuItem } from './type';
+
+
 
 
 function SideBar(props: MenuItemProps) {
     const { dataMenu, collapsed, pathNameLocation } = props
 
-    const [openKeys, setOpenKeys] = useState<string[]>([]);
-
-    useEffect(() => {
-        setOpenKeys(['7f000001-4586-15ec-8951-86e4147f1216'])
-    }, [pathNameLocation]);
+    console.log(pathNameLocation, 'pathNameLocation');
 
     const renderMenu = (menu: MenuItemData) => {
 
         let dataMenu = {
             key: menu.id,
             icon: menu.iconCls ? <i className={`${menu.iconCls}`}></i> : '',
-            label: (
+            label: menu.url ? (
                 <Tooltip title={menu.name}>
-                    {menu.name}
+                    <NavLink to={menu.url} className="flex items-center">
+                        <span >{menu.name}</span>
+                    </NavLink>
+                </Tooltip>
+            ) : (
+                <Tooltip title={menu.name}>
+                    <span>{menu.name}</span>
                 </Tooltip>
             ),
         } as RenderedMenuItem;
@@ -39,18 +41,12 @@ function SideBar(props: MenuItemProps) {
         }
         return dataMenu
     }
-    console.log('openKeys', openKeys, openKeys.length);
-
-
-    const onOpenChange = (keys: string[]) => {
-        console.log('keys', keys);
-        setOpenKeys(keys);
-    };
 
     return (
         <>
 
             <div className="flex flex-col h-full">
+                <div className="absolute left-0 bottom-0 h-full w-full bg-bottom bg-no-repeat opacity-70 z-1" style={{ backgroundImage: `url(${bg1})` }} />
                 {/* Logo và tiêu đề */}
                 <div className='content border-b border-stone-50'>
                     <div className="flex relative items-center">
@@ -76,8 +72,8 @@ function SideBar(props: MenuItemProps) {
                     <Menu
                         className='menu-sider'
                         mode="inline"
-                        openKeys={openKeys}
-                        onOpenChange={onOpenChange}
+                        defaultOpenKeys={findPathByUrl(dataMenu, 'ds_vuan66') || []}
+                        defaultSelectedKeys={findPathByUrl(dataMenu, 'ds_vuan66') || []}
                         items={dataMenu.map((e) => renderMenu(e))}
                     />
                 </div>

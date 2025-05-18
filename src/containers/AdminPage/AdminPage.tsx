@@ -2,40 +2,16 @@ import React, { useState } from 'react';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Button, Flex, Layout, Menu, theme } from 'antd';
-import SideBar from './SideBar/SideBar';
+import SideBar from './SideBar';
+import { PUBLIC_PATH } from '@/utils/constants';
+import ContentLayout from './ContentLayout';
+import HeaderLayout from './HeaderLayout/HeaderLayout';
 import { dataMenu } from './SideBar/type';
+
+
 const { Header, Sider, Content } = Layout;
-
-
-const headerStyle: React.CSSProperties = {
-    textAlign: 'center',
-    color: '#fff',
-    height: 64,
-    paddingInline: 48,
-    lineHeight: '64px',
-    backgroundColor: '#4096ff',
-};
-
-const contentStyle: React.CSSProperties = {
-    textAlign: 'center',
-    minHeight: 120,
-    lineHeight: '120px',
-    color: '#fff',
-    backgroundColor: '#0958d9',
-};
-
-const footerStyle: React.CSSProperties = {
-    textAlign: 'center',
-    color: '#fff',
-    backgroundColor: '#4096ff',
-};
-
-
 
 function AdminPage() {
     const [collapsed, setCollapsed] = useState(false);
@@ -53,18 +29,16 @@ function AdminPage() {
             className='h-screen flex'
         >
             <Layout >
-                <Sider width={sidebarWidth} style={{ backgroundColor: "var(--base-color)" }} trigger={null} collapsible collapsed={collapsed}>
+                <Sider width={sidebarWidth} className='bg-base' trigger={null} collapsible collapsed={collapsed}>
                     <SideBar dataMenu={dataMenu} collapsed={collapsed} pathNameLocation={pathNameLocation} />
                 </Sider>
                 <Layout>
-                    <Header className="bg-white flex items-center justify-between px-4">
-                        <Button
-                            type="text"
-                            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                            onClick={() => setCollapsed(!collapsed)}
-                        />
+                    <Header className="flex px-2 h-[52px] bg-base">
+                        <HeaderLayout collapsed={collapsed} handleTonggle={() => setCollapsed(!collapsed)} />
                     </Header>
-                    <Content style={contentStyle}>Content</Content>
+                    <Content className='text-center min-h-[120px] leading-[120px] text-white bg-[#0958d9]"'>
+                        <ContentLayout />
+                    </Content>
                 </Layout>
             </Layout>
         </Flex>
