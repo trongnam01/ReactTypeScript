@@ -8,15 +8,17 @@ interface GlobalStoreState {
 }
 
 const store = immer<GlobalStoreState>((set) => ({
-  userInfo: null,
+  userInfo: {
+    name: 'Ngô Thị Lan Hương',
+  },
   setUserInfo: (userInfo: any | null) =>
     set((state: GlobalStoreState) => {
       state.userInfo = userInfo;
     }),
 }));
 
-const useGlobalStore = create(
+const useAuthStore = create(
   persist(devtools(store), { name: 'globalStore' }),
 );
 
-export default useGlobalStore;
+export default useAuthStore;

@@ -10,9 +10,9 @@ export const customTheme = {
   },
   components: {
     Layout: {
-      headerBg: 'var(--base-color)',
+      headerBg: 'azure',
       colorBgSider: '#4dc41f',
-      colorBgContent: "#4dc41f",
+      colorBgContent: "transparent",
     },
     Menu: {
       itemBg: "transparent",

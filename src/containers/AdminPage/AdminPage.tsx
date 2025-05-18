@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-} from '@ant-design/icons';
-import { Button, Flex, Layout, Menu, theme } from 'antd';
+import { Flex, Layout, theme } from 'antd';
 import SideBar from './SideBar';
-import { PUBLIC_PATH } from '@/utils/constants';
+// import { PUBLIC_PATH } from '@/utils/constants';
 import ContentLayout from './ContentLayout';
 import HeaderLayout from './HeaderLayout/HeaderLayout';
 import { dataMenu } from './SideBar/type';
@@ -19,7 +15,7 @@ function AdminPage() {
 
     const sidebarWidth = collapsed ? 80 : 250; // Độ rộng của sidebar (80 khi collapsed, 250 khi mở)
 
-    console.log(theme, 'theme');
+    console.log(theme, 'themesss');
 
 
     return (
@@ -33,10 +29,10 @@ function AdminPage() {
                     <SideBar dataMenu={dataMenu} collapsed={collapsed} pathNameLocation={pathNameLocation} />
                 </Sider>
                 <Layout>
-                    <Header className="flex px-2 h-[52px] bg-base">
+                    <Header className="flex px-0 h-[52px] shadow-sd-b">
                         <HeaderLayout collapsed={collapsed} handleTonggle={() => setCollapsed(!collapsed)} />
                     </Header>
-                    <Content className='text-center min-h-[120px] leading-[120px] text-white bg-[#0958d9]"'>
+                    <Content className='text-center min-h-[120px] leading-[120px] text-white p-1 pb-2'>
                         <ContentLayout />
                     </Content>
                 </Layout>

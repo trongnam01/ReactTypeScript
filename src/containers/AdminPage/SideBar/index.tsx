@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { } from 'react';
 
 
 import bg1 from '@/assets/images/menu1.jpg';
-import bg2 from '@/assets/images/menu2.jpg';
-import bg3 from '@/assets/images/menu3.jpg'
-import bg4 from '@/assets/images/menu4.jpg'
+// import bg2 from '@/assets/images/menu2.jpg';
+// import bg3 from '@/assets/images/menu3.jpg'
+// import bg4 from '@/assets/images/menu4.jpg'
 import logo from '@/assets/images/logo1.png';
 import { NavLink } from 'react-router-dom';
 import { Menu, Tooltip } from 'antd';
@@ -50,7 +50,7 @@ function SideBar(props: MenuItemProps) {
                 {/* Logo và tiêu đề */}
                 <div className='content border-b border-stone-50'>
                     <div className="flex relative items-center">
-                        <img src={logo} className="mx-4 my-1 w-[50px] h-[50px]" />
+                        <img alt='logo' src={logo} className="mx-4 my-1 w-[50px] h-[50px]" />
                         <div>
                             {
                                 !collapsed && (
