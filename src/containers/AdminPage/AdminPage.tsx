@@ -3,7 +3,7 @@ import { Flex, Layout, theme } from 'antd';
 import SideBar from './SideBar';
 // import { PUBLIC_PATH } from '@/utils/constants';
 import ContentLayout from './ContentLayout';
-import HeaderLayout from './HeaderLayout/HeaderLayout';
+import HeaderLayout from './HeaderLayout';
 import { dataMenu } from './SideBar/type';
 
 
@@ -28,11 +28,11 @@ function AdminPage() {
                 <Sider width={sidebarWidth} className='bg-base' trigger={null} collapsible collapsed={collapsed}>
                     <SideBar dataMenu={dataMenu} collapsed={collapsed} pathNameLocation={pathNameLocation} />
                 </Sider>
-                <Layout>
+                <Layout className="min-h-screen flex flex-col">
                     <Header className="flex px-0 h-[52px] shadow-sd-b">
                         <HeaderLayout collapsed={collapsed} handleTonggle={() => setCollapsed(!collapsed)} />
                     </Header>
-                    <Content className='text-center min-h-[120px] leading-[120px] text-white p-1 pb-2'>
+                    <Content style={{ height: 'calc(100vh - 52px)' }} className="flex-grow overflow-y-auto p-1 pb-2 text-white text-center leading-[120px]">
                         <ContentLayout />
                     </Content>
                 </Layout>

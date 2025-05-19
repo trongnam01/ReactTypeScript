@@ -18,13 +18,13 @@ function Auth(props: { children: React.ReactNode }) {
             navigate('/home');
         }
     }, [navigate]);
-
     const callAPI = useCallback(async (callback?: () => void) => {
-        const responseInfo = await apiGetInfoUser("");
+        const responseInfo = await apiGetInfoUser("products");
         updateUserInfoData(responseInfo);
         checkRedirect();
         if (callback) callback();
-    }, [updateUserInfoData, checkRedirect]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [updateUserInfoData]);
 
     const getToken = useCallback(async (code: string, callback?: () => void) => {
         // Truyền authCode trực tiếp chứ không lấy lại từ localStorage
@@ -40,26 +40,32 @@ function Auth(props: { children: React.ReactNode }) {
     }, [callAPI]);
 
     useEffect(() => {
-        const localParams = new URL(window.location.href);
-        console.log('localParams', localParams);
-        const isLogin = () => {
-            const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
-            if (!accessToken) {
-                // window.location.href = '/login';
-                return;
+        const checkLogin = async () => {
+            const token = localStorage.getItem(ACCESS_TOKEN) || '';
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const isLogin = () => {
+                if (!token) {
+                    // window.location.href = '/login';
+                    return;
+                }
+                setIsAuthenticated(true);
+            };
+
+            const authCode = urlParams.get('authCode') || '';
+
+            if (authCode && !token) {
+                await getToken(authCode, isLogin);
+            } else {
+                await callAPI(isLogin);
             }
-            setIsAuthenticated(true);
         };
 
-        const token = localStorage.getItem(ACCESS_TOKEN);
-
-        if (localParams.searchParams.get('authCode') && !token) {
-            getToken(localParams.searchParams.get('authCode') || '', isLogin);
-        } else {
-            callAPI(isLogin);
-        }
+        checkLogin();
     }, [getToken, callAPI]);
+
+
 
     return (
         <>{isAuthenticated && children}</>

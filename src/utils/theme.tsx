@@ -10,7 +10,7 @@ export const customTheme = {
   },
   components: {
     Layout: {
-      headerBg: 'azure',
+      headerBg: '#fff',
       colorBgSider: '#4dc41f',
       colorBgContent: "transparent",
     },
@@ -22,6 +22,10 @@ export const customTheme = {
       itemActiveBg: "#08eaa8",
       itemHoverColor: "#ffffff",
       itemHoverBg: "#00A474",
+    },
+    Table: {
+      paddingContentVertical: 4,
+      paddingContentHorizontal: 8,
     },
   },
 };

@@ -20,6 +20,8 @@ export interface Column {
   align?: 'left' | 'right' | 'center';
   ellipsis?: boolean;
   fixed?: 'left' | 'right';
+  minWidth?: number;
+
 }
 
 export interface ColumnGroup extends Omit<Column, 'field'> {
@@ -137,6 +139,8 @@ const TableCommon = (props: Props) => {
     }
     return [];
   };
+  console.log(getData());
+
 
   // useEffect(() => {
   //   if (isCheckedAll) {
@@ -238,7 +242,6 @@ const TableCommon = (props: Props) => {
   // loại bỏ key trước khi gửi lại
   const removeKeyInData = (dataSelected: any[]): any[] =>
     dataSelected.map((item) => {
-      // eslint-disable-next-line unused-imports/no-unused-vars
       const { key, ...newData } = item;
       return newData;
     });
@@ -293,7 +296,7 @@ const TableCommon = (props: Props) => {
     ...iterableExpand,
     expandedRowRender: renderSubItem
       ? (record: any, index: number, indent: number, expanded: boolean) =>
-          renderSubItem(record, index, indent, expanded)
+        renderSubItem(record, index, indent, expanded)
       : undefined,
     rowExpandable: expandCondition ? (record: any) => expandCondition(record) : undefined,
   });
@@ -316,8 +319,8 @@ const TableCommon = (props: Props) => {
         locale={locale}
         virtual={virtual}
         scroll={scrollToProps}
+        bordered
         {...iterableProps}
-        // bordered
       />
     </div>
   );
@@ -326,16 +329,16 @@ const TableCommon = (props: Props) => {
 TableCommon.defaultProps = {
   columns: [], //type of array - required
   data: [], //type of array - required
-  parseFunction: () => {}, //type of function
+  parseFunction: () => { }, //type of function
   isShowCheckbox: false, //type og bool
   // keySelect: 'id',          //type of string
   isShowPaging: false, //type og bool
-  onChangePage: () => {}, //type of function - required if isShowPaging = true
+  onChangePage: () => { }, //type of function - required if isShowPaging = true
   isCheckedAll: false,
   isRemoveSelected: false,
   virtual: false,
   // isSubItem: false,
-  onSelect: () => {},
+  onSelect: () => { },
   classNameTable: '', // class để style cho table
   // totalPage: 1, // tong so trang
   totalCountData: 0,

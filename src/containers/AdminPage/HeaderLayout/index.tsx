@@ -57,7 +57,19 @@ function HeaderLayout(props: HederProps) {
                 />
             </div>
             <div className='flex h-full items-center z-10'>
-                <Space className='flex h-full items-center'>
+                <Space className='flex mr-2 h-full items-center'>
+                    <Badge size="small" count={5} offset={[-2, 4]} className='flex h-full items-center'>
+                        <Tooltip title="Trao đổi thông tin">
+                            <Button
+                                onClick={handleClickEmail}
+                                type="text"
+                                icon={<i className="fa-solid fa-circle-question text-[24px]"></i>}
+                            />
+                        </Tooltip>
+                    </Badge>
+
+                </Space>
+                <Space className='flex mr-2 h-full items-center'>
                     <Badge size="small" count={5} offset={[-2, 4]} className='flex h-full items-center'>
                         <Tooltip title="Email">
                             <Button
@@ -70,7 +82,7 @@ function HeaderLayout(props: HederProps) {
 
                 </Space>
 
-                <Space className='mx-2 flex h-full items-center'>
+                <Space className='mr-2 flex h-full items-center'>
                     <Badge size="small" count={5} offset={[-2, 4]} className='flex h-full items-center'>
                         <Tooltip title="Phản ánh">
                             <Button onClick={handleClickEmail} type="text" icon={<i className="fa-solid fa-comment text-[24px]"></i>} />

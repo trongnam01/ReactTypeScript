@@ -1,3 +1,4 @@
+import { url } from "inspector";
 import { JSX } from "react";
 
 export interface MenuItemData {
@@ -47,7 +48,8 @@ export const dataMenu = [
             },
             {
                 "id": "7f000001-4586-15ec-8951-86e4147f1234",
-                "name": "Vụ án chuyển"
+                "name": "Vụ án chuyển",
+                url: "ds",
             },
             {
                 "id": "7f000001-4586-15ec-8951-86e4147f1235",

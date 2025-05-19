@@ -12,6 +12,7 @@ import { handleError } from './common';
 const api = axios.create({
   baseURL,
 });
+// https://dummyjson.com/docs/products#products-all
 
 const onRequest = async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
   const newConfig = {

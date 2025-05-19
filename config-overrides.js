@@ -1,6 +1,18 @@
-const { override, useBabelRc } = require('customize-cra');
+// config-overrides.js
+const { override, useBabelRc, overrideDevServer } = require('customize-cra');
 
-module.exports = override(
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useBabelRc(),
-);
+const customDevServer = () => (config) => {
+    config.setupMiddlewares = (middlewares, devServer) => {
+        // Đảm bảo không có middleware nào bị ghi đè
+        console.log("Custom middlewares applied");
+        return middlewares;
+    };
+    return config;
+};
+
+module.exports = {
+    webpack: override(
+        useBabelRc()
+    ),
+    devServer: overrideDevServer(customDevServer())
+};
